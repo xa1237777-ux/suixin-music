@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101114">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>隨心音樂</title>
+  <meta name="description" content="依國家、語言與類型，自動建立 YouTube 隨機歌單。">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AUTO MIX</p>
+        <h1>隨心音樂</h1>
+      </div>
+      <button id="reshuffleBtn" class="icon-btn" type="button" aria-label="重新隨機排列" title="重新隨機排列">⤨</button>
+    </header>
+
+    <section class="search-panel" aria-label="搜尋與自動選歌">
+      <form id="keywordForm" class="search-row">
+        <input id="keyword" type="search" placeholder="搜尋歌名、歌手或關鍵字" autocomplete="off" aria-label="搜尋歌名或歌手">
+        <button type="submit" class="search-btn">搜尋</button>
+      </form>
+
+      <div class="filters">
+        <label>國家
+          <select id="country">
+            <option value="ALL">全部國家混合</option>
+            <option value="TW" selected>台灣</option>
+            <option value="JP">日本</option>
+            <option value="KR">韓國</option>
+            <option value="US">美國</option>
+            <option value="GB">英國</option>
+            <option value="HK">香港</option>
+          </select>
+        </label>
+        <label>語言
+          <select id="language">
+            <option value="all">全部語言</option>
+            <option value="zh-TW" selected>中文</option>
+            <option value="nan">台語</option>
+            <option value="yue">粵語</option>
+            <option value="ja">日文</option>
+            <option value="ko">韓文</option>
+            <option value="en">英文</option>
+          </select>
+        </label>
+        <label>類型
+          <select id="genre">
+            <option value="all" selected>全部</option>
+            <option value="pop">流行</option>
+            <option value="ballad">抒情</option>
+            <option value="rock">搖滾</option>
+            <option value="dance">舞曲</option>
+            <option value="hiphop">嘻哈</option>
+            <option value="electronic">電子</option>
+            <option value="rnb">R&amp;B</option>
+            <option value="jazz">爵士</option>
+            <option value="classical">古典</option>
+            <option value="oldies">懷舊</option>
+            <option value="copyrightfree">無版權音樂</option>
+          </select>
+        </label>
+        <label id="royaltyStyleWrap" hidden>無版權風格
+          <select id="royaltyStyle">
+            <option value="background" selected>輕音樂／店內背景</option>
+            <option value="all">全部</option>
+            <option value="lofi">Lo-fi</option>
+            <option value="pop">流行</option>
+            <option value="electronic">電子音樂</option>
+            <option value="jazz">爵士</option>
+            <option value="piano">鋼琴</option>
+            <option value="guitar">吉他</option>
+            <option value="cafe">咖啡廳</option>
+            <option value="upbeat">輕快活潑</option>
+            <option value="relaxing">放鬆療癒</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="autoPlayBtn" class="primary-btn" type="button">
+        <span class="play-mark">▶</span>
+        自動選歌播放
+      </button>
+      <p id="status" class="status" role="status">選好條件後，按一次就會隨機連續播放</p>
+    </section>
+
+    <section id="nowPlaying" class="now-playing" aria-label="目前播放" hidden>
+      <div class="video-frame" aria-label="YouTube 精簡播放器"><div id="player"></div></div>
+      <div class="track-copy">
+        <p class="eyebrow">NOW PLAYING</p>
+        <h2 id="currentTitle">準備播放</h2>
+        <p id="currentChannel"></p>
+        <a id="currentSource" class="source-link" href="#" target="_blank" rel="noopener">查看來源與授權</a>
+      </div>
+      <div class="controls">
+        <button id="prevBtn" type="button" aria-label="上一首">◀</button>
+        <button id="toggleBtn" class="toggle" type="button" aria-label="播放或暫停">Ⅱ</button>
+        <button id="nextBtn" type="button" aria-label="下一首">▶</button>
+      </div>
+    </section>
+
+    <section class="queue-section">
+      <div class="section-head">
+        <h2>播放清單</h2>
+        <span id="queueCount">0 首</span>
+      </div>
+      <ol id="queue" class="queue">
+        <li class="empty">搜尋歌曲或使用自動選歌，歌單會顯示在這裡。</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="app.js"></script>
+</body>
+</html>

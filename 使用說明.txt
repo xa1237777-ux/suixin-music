@@ -1,0 +1,31 @@
+隨心音樂｜Cloudflare Worker 部署說明
+
+此版本已支援 Cloudflare 現在的 Worker Git 部署方式，靜態網頁和保護 API Key 的搜尋後端會一起部署。
+
+1. 解壓縮 ZIP，把解壓後的檔案上傳到一個 GitHub 儲存庫。
+2. 登入 Cloudflare，前往「Workers & Pages」→「建立」→「連接至 Git」。
+3. 選擇剛才的 GitHub 儲存庫。
+4. Build command 留空；Deploy command 使用「npx wrangler deploy」；Root directory 填「/」。
+5. 完成第一次部署後，進入該 Worker 專案的「Settings」→「Variables and Secrets」。
+6. 在 Production 新增加密變數：
+   Key：YOUTUBE_API_KEY
+   Value：貼上你的 YouTube API Key
+7. 儲存後重新部署一次。以後 API Key 不必重複設定。
+
+如果畫面上的 Cloudflare 選單名稱稍有不同，請找「環境變數與祕密」；變數名稱必須完全是 YOUTUBE_API_KEY。
+
+使用方式：
+- 可直接搜尋歌手、歌名或關鍵字。
+- 也可選擇國家、語言、類型，再按「自動選歌播放」。
+- 台灣預設為「中文＋全部」，會從熱門、觀看次數較高的歌曲中隨機建立歌單。
+- 選擇「全部國家混合」時，會分別取得中文、日文、韓文、英文熱門歌曲後混合播放。
+- 切換單一國家時，語言會自動配對：台灣中文、日本日文、韓國韓文、美英英文、香港粵語。
+- 全部國家每次會使用 4 次 YouTube 搜尋額度，其他選項每次使用 1 次。
+- 如果混合後不足 8 首，程式會再補抓一次熱門歌曲，避免歌單只剩同一首。
+- 「無版權音樂」會使用 YouTube Creative Commons 授權篩選，並顯示來源與授權連結。
+- 無版權音樂可再選：全部、輕音樂／店內背景、Lo-fi、流行、電子、爵士、鋼琴、吉他、咖啡廳、輕快、放鬆。
+- 預設為較適合店內播放的「輕音樂／店內背景」。
+- Creative Commons 通常要求標示作者與來源；店內公開播放前仍應查看每首影片的授權說明。
+- YouTube 播放器已縮成精簡尺寸；為維持穩定播放與符合 YouTube 播放器規範，不會完全隱藏。
+- 第一次播放需手動按按鈕；之後歌曲播完會自動下一首。
+- iPhone 鎖定畫面或切換到其他 App 時，YouTube 可能停止播放。

@@ -1,0 +1,9 @@
+{
+  "name": "隨心音樂",
+  "short_name": "隨心音樂",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0d10",
+  "theme_color": "#101114",
+  "description": "自動建立 YouTube 隨機歌單"
+}
